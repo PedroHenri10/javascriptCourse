@@ -4,7 +4,7 @@
 //offsetTop - A Number, representing the top position of the element, in pixels
 
 // ********** set date ************
-const date = document.getElementById('date');
+const date = document.getElementById("date");
 date.innerHTML = new Date().getFullYear();
 
 // ********** close links ************
@@ -14,7 +14,7 @@ const links = document.querySelector('.links');
 
 navToggle.addEventListener('click', function(){
     /* linksContainer.classList.toggle("show-links");*/
-    const containerHeight = linksContainer.getBoundingClientRect();
+    const containerHeight = linksContainer.getBoundingClientRect().height;
     const linksHeight = links.getBoundingClientRect().height;
 
     if (containerHeight ===0){
