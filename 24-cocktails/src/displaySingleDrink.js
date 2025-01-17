@@ -1,16 +1,31 @@
-import fetchDrinks from './src/fetchDrinks.js';
-import displayDrink from './src/displaySingleDrink.js';
+import {hideLoading} from './toggleLoading.js';
+import get from './getElement.js';
 
-const presentDrink = async () => {
-    const id = localStorage.getItem('drink');
-    if(!id){
-        window.location.replace('index.html');
-    }else{
-        const drink = await fetchDrinks(
-            `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
-        );
-        displayDrink(drink);
-    }
-};
+const displayDrink  = (data) => {
+    hideLoading();
 
-window.addEventListener('DOMContentLoaded', presentDrink);
+    const drink = data.drinks[0];
+    const { strDrinkThumb: image, strDrink: name, strInstructions: desc } = drink;
+    const list = {
+        drink.strIngredient1,
+        drink.strIngredient2,
+        drink.strIngredient3,
+        drink.strIngredient4,
+        drink.strIngredient5,
+    };
+    const img = get('.drink-img');
+    const drinkName = get('.drink-name');
+    const description = get('.drink-desc');
+    const ingredients = get('.drink-ingredients');
+    img.src = image;
+    document.title = name;
+    drinkName.textContent = name;
+    description.textContent = desc;
+    ingredients.innerHTML = list.map((item) => {
+        if(!item) return;
+        return `<li><i class="far fa-check-square"></i>${item}</li>`;
+    })
+    .join('');
+}
+
+export default displayDrink;
