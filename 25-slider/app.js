@@ -1,8 +1,8 @@
 import people from './data.js';
 
 const container = document.querySelector('.slide-container');
-const nextBtn = document.querySelector('.nextBtn');
-const prevBtn = document.querySelector('.prevBtn');
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
 
 // set slides
 container.innerHTML = people.map((person, slideIndex) => {
@@ -15,6 +15,7 @@ container.innerHTML = people.map((person, slideIndex) => {
     if(slideIndex === people.length -1){
         position = 'last';
     }
+    
     return `<article class="slide ${position}">
           <img
             src="${img}"
@@ -36,19 +37,32 @@ container.innerHTML = people.map((person, slideIndex) => {
 const startSlider = (type) => {
     const active = document.querySelector('.active');
     const last = document.querySelector('.last');
-    const next = active.nextElementSibling;
-    if(!next){
-        next.container.firstElementChild;
+    let next;
+
+    if (type === 'prev') {
+        next = last.previousElementSibling;
+        if (!next) {
+            next = container.lastElementChild; // Wrap around to the last slide
+        }
+        active.classList.remove('active');
+        active.classList.add('next');
+        last.classList.remove('last');
+        last.classList.add('active');
+        next.classList.remove('next');
+        next.classList.add('last');
+    } else { // type === 'next' or undefined
+        next = active.nextElementSibling;
+        if (!next) {
+            next = container.firstElementChild; // Wrap around to the first slide
+        }
+        active.classList.remove('active');
+        active.classList.add('last');
+        last.classList.remove('last');
+        last.classList.add('next');
+        next.classList.remove('next');
+        next.classList.add('active');
     }
-    active.classList.remove(['active'])
-    last.classList.remove(['last'])
-    next.classList.remove(['next'])
-
-    active.classList.add(['last'])
-    last.classList.add(['next']);
-    next.classList.add(['active'])
 };
-
 nextBtn.addEventListener('click', () => {
     startSlider();
 });
