@@ -4,7 +4,7 @@ const toggleBtn = document.querySelector('.toggle-btn');
 const closeBtn = document.querySelector('.close-btn');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
 const sidebar = document.querySelector('.sidebar-links');
-const sideblinkBtnsar = [...document.querySelectorAll('.link-btn')];
+const linkBtns = [...document.querySelectorAll('.link-btn')];
 const submenu = document.querySelector('.submenu');
 const hero = document.querySelector('.hero');
 const nav = document.querySelector('.nav');
@@ -42,7 +42,7 @@ ${links
       const center = (tempBtn.left + tempBtn.right) / 2;
       const bottom = tempBtn.bottom - 3;
 
-      const tempPage = sublinks.find(({page}) => link.page === text);
+      const tempPage = sublinks.find((link) => link.page === text);
       if(tempPage){
         const {page, links} = tempPage;
         submenu.classList.add('show');
