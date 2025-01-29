@@ -8,7 +8,7 @@ let index = 0
 let pages = []
 
 const setupUI = () => {
-    displayFollllowers(pages[index])
+    displayFollowers(pages[index])
     displayButtons(btnContainer, pages, index)
 }
 
