@@ -25,6 +25,9 @@ const fetchPages = async (searchValue) => {
             resultsDOM.innerHTML = '<div class="error">no matching results. Please try again</div>';
             return;
         }
+        renderResults(results);
+    }catch (error){
+      resultsDOM.innerHTML = '<div class="error"> there was an error...</div>';
     }
 };
 
