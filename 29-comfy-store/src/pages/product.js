@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async function() {
   const urlID = window.location.search;
   try{
   const response = await fetch(`${singleProductUrl}${urlID}`)
-  if(response.status >= 200 && response.status <= 200){
+  if(response.status >= 200 && response.status <= 299){
     const product = await response.json()
     //grab data
     const {id, fields} = product;
@@ -67,4 +67,4 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 cartBtn.addEventListener('click', function(){
   addToCart(productID);
-})
+});

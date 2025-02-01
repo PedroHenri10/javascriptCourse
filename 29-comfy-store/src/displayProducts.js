@@ -29,7 +29,7 @@ const display = (products, element, filters) => {
         if(parent.classList.contains('.product-cart-btn')){
             addToCart(parent.dataset.id)
         }
-    })
+    });
 };
 
 export default display;

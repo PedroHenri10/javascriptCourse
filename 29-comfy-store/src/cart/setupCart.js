@@ -16,7 +16,7 @@ const cartTotalDOM = getElement('.cart-total');
 
 let cart = getStorageItem('cart')
 
-export const addToCart = () => {
+export const addToCart = (id) => {
   let item = cart.find((cartItem) => cartItem.id === id);
   if(!item){
     let product = findProduct(id);
@@ -32,7 +32,7 @@ export const addToCart = () => {
     newAmount.textContent = amount;
   }
   // add one to the item count
-  displayCartItemCount()
+  displayCartItemCount();
   // display cart totals
   displayCartTotal();
   //set cart in local storage
@@ -45,11 +45,11 @@ function displayCartItemCount(){
   const amount = cart.reduce((total, cartItem) => {
     return (total += cartItem.amount);
   }, 0);
-  cartTotalDOM.textContent = amount;
+  cartItemCountDOM.textContent = amount;
 }
 function displayCartTotal(){
   let total = cart.reduce((total, cartItem) => {
-    return total += cartItem.price * cartItem.amount
+    return (total += cartItem.price * cartItem.amount);
 }, 0);
   cartTotalDOM.textContent = `Total : ${formatPrice(total)}`;
 }
@@ -63,7 +63,6 @@ function displayCartItemsDOM(){
 function removeItem(id){
   cart = cart.filter((cartItem) => cartItem.id !== id)
 }
-
 function increaseAmount(id){
   let newAmount;
   cart = cart.map((cartItem) =>{
@@ -75,7 +74,6 @@ function increaseAmount(id){
   });
   return newAmount;
 }
-
 function decreaseAmount(id){
   let newAmount;
   cart = cart.map((cartItem) =>{
@@ -101,22 +99,24 @@ function setupCartFunctionality(){
      element.parentElement.parentElement.remove();
     }
     //increase
-    if (parent.classList.contains('cart-item-increase-btn'){
+    if (parent.classList.contains('cart-item-increase-btn')){
       const newAmount = increaseAmount(parentID);
       parent.nextElementSibling.textContent = newAmount;
-    })
-    if(parent.classList.contains('cart-item-decrease-btn'){
-      const newAmount = decreaseAmount(parentID){
+    }
+    if(parent.classList.contains('cart-item-decrease-btn')){
+      const newAmount = decreaseAmount(parentID)
         if(newAmount === 0){
           removeItem(parentID)
           parent.parentElement.parentElement.remove()
         }
-        else[
-          parent.previousElementSibling.textContent = newAmount
-        ]
+        else{
+          parent.previousElementSibling.textContent = newAmount;
+        }
       }
-    })
-  })
+      displayCartItemCount();
+      displayCartTotal();
+      setStorageItem('cart', cart);
+    });
 }
 
 const init = () => {

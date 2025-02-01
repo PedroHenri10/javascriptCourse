@@ -1,10 +1,10 @@
 import { formatPrice, getElement } from '../utils.js';
-
+const cartItemsDOM = getElement('.cart-items');
 const addToCartDOM = ({id, name, price, image, amount}) => {
     const article = document.createElement('article');
     article.classList.add('cart-item');
     article.setAttribute('data-id', id);
-    article.innerHTML = ` <img src="${image}"
+    article.innerHTML = `<img src="${image}"
               class="cart-item-img"
               alt="${name}"
             />  
