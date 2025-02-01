@@ -21,7 +21,7 @@ export const addToCart = (id) => {
   if(!item){
     let product = findProduct(id);
     product = {...product,amount:1};
-    cart = {...cart, product};
+    cart = [...cart, product];
     // add item to the the
     addToCartDOM(product)
   }else{
