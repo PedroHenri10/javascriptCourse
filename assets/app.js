@@ -104,7 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const prevBtn = carousel.querySelector('.prev');
             const nextBtn = carousel.querySelector('.next');
 
-            
+            nextBtn.addEventListener('click', () => {
+                const scrollAmount = container.clientWidth * 0.8;
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+
+            prevBtn.addEventListener('click', () => {
+                const scrollAmount = container.clientWidth * 0.8;
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        });
     }
 
     createCarousels();
