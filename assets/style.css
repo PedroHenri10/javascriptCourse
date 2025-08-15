@@ -64,3 +64,56 @@ h1 {
   color: #ccc;
   margin: 5px 0 10px;
 }
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #e50914;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%); 
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    display: grid; 
+    place-items: center; 
+    font-size: 1.5rem; 
+    cursor: pointer;
+    z-index: 1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.carousel:hover .nav-btn {
+    opacity: 1;
+}
+
+.nav-btn.prev {
+    left: 10px; 
+}
+
+.nav-btn.next {
+    right: 10px; 
+}
