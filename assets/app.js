@@ -1,4 +1,6 @@
-const categories = [
+document.addEventListener('DOMContentLoaded', () => {
+
+    const categories = [
     {
         title: "DOM Fundamentals",
         projects: [
@@ -49,3 +51,53 @@ const categories = [
         ]
     },
 ];
+
+    const portfolioContainer = document.getElementById('portfolio-container');
+
+    function createCarousels() {
+        categories.forEach(category => {
+            const categorySection = document.createElement('section');
+            categorySection.className = 'carousel-category';
+
+            const title = document.createElement('h2');
+            title.textContent = category.title;
+            categorySection.appendChild(title);
+
+            const carousel = document.createElement('div');
+            carousel.className = 'carousel';
+
+            const carouselContainer = document.createElement('div');
+            carouselContainer.className = 'carousel-container';
+
+            category.projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                card.onclick = () => window.open(`${project.folder}/${project.file || 'index.html'}`, '_blank');
+
+                card.innerHTML = `
+                    <img src="./assets/thumbnails/${project.image}" alt="${project.title}" onerror="this.onerror=null;this.src='./assets/thumbnails/placeholder.png'"/>
+                    <div class="card-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <a href="${project.folder}/${project.file || 'index.html'}" class="btn" target="_blank" rel="noopener noreferrer">Abrir</a>
+                    </div>
+                `;
+                carouselContainer.appendChild(card);
+            });
+
+            carousel.appendChild(carouselContainer);
+            carousel.innerHTML += `
+                <button class="nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
+            `;
+
+            categorySection.appendChild(carousel);
+            portfolioContainer.appendChild(categorySection);
+        });
+    }
+
+    
+
+    createCarousels();
+});
