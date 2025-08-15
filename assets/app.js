@@ -97,7 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
+    function setupNavigation() {
+        const carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(carousel => {
+            const container = carousel.querySelector('.carousel-container');
+            const prevBtn = carousel.querySelector('.prev');
+            const nextBtn = carousel.querySelector('.next');
+
+            
+    }
 
     createCarousels();
+    setupNavigation();
 });
